@@ -196,41 +196,4 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-  // --- BOTTOM NAVBAR STYLES ---
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#222', // Dark background like wireframe
-    paddingVertical: 10,
-    paddingBottom: Platform.OS === 'ios' ? 20 : 10, // Safe area for iOS
-    borderTopWidth: 1,
-    borderTopColor: '#444',
-  },
-  navItem: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-  },
-  navIcon: {
-    fontSize: 20,
-    marginBottom: 4,
-    color: '#888',
-  },
-  navText: {
-    color: '#888',
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-  // Active State Styles
-  activeTabIndicator: {
-    position: 'absolute',
-    top: -10,
-    width: 40,
-    height: 3,
-    backgroundColor: '#28AAFD', // Active Blue Line
-  },
-  activeNavText: {
-    color: '#FFF',
-  },
 });
