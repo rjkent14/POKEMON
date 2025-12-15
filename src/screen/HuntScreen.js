@@ -10,7 +10,6 @@ import {
   Platform,
   StatusBar,
   Animated,
-  Dimensions,
   Image,
   Modal
 } from 'react-native';
@@ -23,7 +22,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import { fetchPokemonList, fetchPokemonDetails } from '../api/pokeapi';
 
 const CAPTURE_RADIUS_METERS = 40;
-const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const darkMapStyle = [
   { elementType: "geometry", stylers: [{ color: "#212121" }] },
