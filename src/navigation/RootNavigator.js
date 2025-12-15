@@ -1,11 +1,11 @@
 // File: src/navigation/RootNavigator.js
 // REPLACE YOUR ENTIRE FILE WITH THIS CODE
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Animated } from 'react-native';
 
 // Import your existing screens
 import LoginScreen from '../screen/LoginScreen';
@@ -108,11 +108,34 @@ const MainTabs = () => (
 );
 
 // Root Navigator (Conditional Auth/App)
-export const RootNavigator = ({ isLoggedIn }) => (
-  <NavigationContainer>
-    {isLoggedIn ? <MainTabs /> : <AuthStack />}
-  </NavigationContainer>
-);
+export const RootNavigator = ({ isLoggedIn }) => {
+  const positionAnim = useRef(new Animated.ValueXY({x: 50, y: 100})).current;
+
+  const onStateChange = (state) => {
+    if (!state) return;
+    const route = state.routes[state.index];
+    let newX = 50, newY = 100;
+    if (route.name === 'Home') { newX = 50; newY = 100; }
+    else if (route.name === 'Hunt') { newX = 250; newY = 150; }
+    else if (route.name === 'Capture') { newX = 150; newY = 250; }
+    else if (route.name === 'Profile') { newX = 300; newY = 100; }
+    Animated.spring(positionAnim, {
+      toValue: {x: newX, y: newY},
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return (
+    <View style={{flex: 1}}>
+      <NavigationContainer onStateChange={onStateChange}>
+        {isLoggedIn ? <MainTabs /> : <AuthStack />}
+      </NavigationContainer>
+      <Animated.View style={[styles.floatingContainer, {transform: positionAnim.getTranslateTransform()}]}>
+        <Text style={styles.floatingText}>🎯</Text>
+      </Animated.View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   tabBar: {
@@ -141,5 +164,22 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontFamily: 'monospace',
     fontWeight: 'bold',
+  },
+  floatingContainer: {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    backgroundColor: '#8b5cf6',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+  },
+  floatingText: {
+    fontSize: 24,
   },
 });

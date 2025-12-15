@@ -166,9 +166,9 @@ const styles = StyleSheet.create({
   nameText: { color: '#FFF', fontWeight: 'bold', fontSize: 16 },
   socialRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 },
   socialBtn: {
-    backgroundColor: '#28AAFD', padding: 10, borderRadius: 8, flex: 1, marginRight: 5, alignItems: 'center'
+    backgroundColor: '#8b5cf6', padding: 10, borderRadius: 8, flex: 1, marginRight: 5, alignItems: 'center'
   },
-  logBtn: { backgroundColor: '#FFCB05', marginRight: 0, marginLeft: 5 },
+  logBtn: { backgroundColor: '#a855f7', marginRight: 0, marginLeft: 5 },
   socialText: { fontWeight: 'bold', fontSize: 12, color: '#000' },
   greenScreen: {
     flex: 1,

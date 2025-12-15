@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   captureButton: {
-    backgroundColor: "#dc2626",
+    backgroundColor: "#8b5cf6",
     paddingVertical: 14,
     borderRadius: 8,
     alignItems: "center",
@@ -356,7 +356,7 @@ const styles = StyleSheet.create({
     borderColor: "#fbbf24",
     marginBottom: 12,
   },
-  voiceButtonActive: { backgroundColor: "#fbbf24" },
+  voiceButtonActive: { backgroundColor: "#8b5cf6" },
   voiceText: { color: "#fff", fontWeight: "bold", fontSize: 14, fontFamily: "monospace" },
 
   recognizedBox: { backgroundColor: "#065f46", borderWidth: 2, borderColor: "#10b981", padding: 12, borderRadius: 6, marginBottom: 12 },

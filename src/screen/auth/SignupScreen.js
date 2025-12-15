@@ -243,12 +243,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   primaryButton: {
-    backgroundColor: '#3B4CCA', // Classic Blue
+    backgroundColor: '#8b5cf6', // Purple
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: '#1C2C80',
+    borderColor: '#5b21b6',
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.30,
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Courier' : 'monospace',
   },
   secondaryLink: {
-    color: '#FFCB05',
+    color: '#a855f7',
     fontWeight: 'bold',
     fontSize: 14,
     textDecorationLine: 'underline',

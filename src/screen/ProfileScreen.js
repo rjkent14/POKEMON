@@ -430,14 +430,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   navButton: {
-    backgroundColor: '#28AAFD',
+    backgroundColor: '#8b5cf6',
     width: 100,
     height: 40,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#1C5D8D',
+    borderColor: '#5b21b6',
     elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -474,13 +474,13 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   logoutButton: {
-    backgroundColor: '#FFCB05', // Pokemon Yellow
+    backgroundColor: '#a855f7', // Purple
     width: '100%',
     paddingVertical: 10,
     borderRadius: 20,
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#C59E00',
+    borderColor: '#7c3aed',
   },
   logoutText: {
     color: '#333',

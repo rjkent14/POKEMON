@@ -313,7 +313,7 @@ const HuntScreen = ({ navigation }) => {
 
           {/* MAP VIEW */}
           {location ? (
-            <View style={{flex: 1}}>
+            <View style={styles.mapContainer}>
                 <MapView
                 provider={PROVIDER_GOOGLE}
                 customMapStyle={darkMapStyle}
@@ -367,13 +367,8 @@ const HuntScreen = ({ navigation }) => {
              <Text style={styles.biomeText}>📍 {biomeType} ZONE</Text>
           </View>
 
-        </View>
-      </View>
-
-      {/* 3. CONTROL PANEL */}
-      <View style={styles.controlsContainer}>
-
-        <View style={styles.radarPanel}>
+          {/* RADAR SIGNALS ON THE RIGHT */}
+          <View style={styles.radarContainer}>
             <View style={styles.radarHeader}>
                 <Text style={styles.panelLabel}>RADAR SIGNALS</Text>
                 <View style={styles.blinkingDot} />
@@ -381,15 +376,15 @@ const HuntScreen = ({ navigation }) => {
 
             {nearbyPokemon.length > 0 ? (
             <FlatList
-                horizontal
                 data={nearbyPokemon}
-                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
                 keyExtractor={(item, index) => `${item.id}-${index}`}
                 contentContainerStyle={{ paddingVertical: 5 }}
                 renderItem={({ item }) => {
                     const dist = location ? Math.round(getDistance(location.latitude, location.longitude, item.latitude, item.longitude)) : '???';
                     return (
                     <TouchableOpacity style={styles.trackerCard} onPress={() => handleEncounter(item)}>
+                        <Text style={styles.pokeLabel}>POKÉMON</Text>
                         <Image source={{ uri: item.image }} style={styles.trackerImage} />
                         <Text style={styles.trackerName}>{item.name.substring(0, 8)}</Text>
                         <View style={[styles.distBadge, dist <= CAPTURE_RADIUS_METERS ? {backgroundColor:'#4ade80'} : {backgroundColor:'#fbbf24'}]}>
@@ -402,7 +397,13 @@ const HuntScreen = ({ navigation }) => {
             ) : (
                 <Text style={styles.emptyText}>NO SIGNALS DETECTED</Text>
             )}
+          </View>
+
         </View>
+      </View>
+
+      {/* 3. CONTROL PANEL */}
+      <View style={styles.controlsContainer}>
 
         <TouchableOpacity style={styles.scanButton} onPress={handleRefresh}>
             <View style={styles.scanButtonInner}>
@@ -562,6 +563,18 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     overflow: 'hidden',
     position: 'relative',
+    flexDirection: 'row',
+  },
+  mapContainer: {
+    flex: 1,
+    position: 'relative',
+  },
+  radarContainer: {
+    width: 140,
+    backgroundColor: '#222',
+    borderLeftWidth: 2,
+    borderLeftColor: '#555',
+    padding: 10,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
@@ -649,21 +662,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF0000',
   },
   trackerCard: {
-    backgroundColor: '#333',
-    width: 90,
-    height: 105,
-    borderRadius: 6,
-    marginRight: 10,
+    backgroundColor: '#1a1a1a',
+    width: '100%',
+    height: 80,
+    borderRadius: 8,
+    marginBottom: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#555',
+    borderWidth: 2,
+    borderColor: '#00FF00',
     padding: 2,
+    shadowColor: '#00FF00',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 5,
   },
   trackerImage: {
     width: 60,
     height: 60,
     marginBottom: 2,
+  },
+  pokeLabel: {
+    color: '#00FF00',
+    fontSize: 8,
+    fontFamily: Platform.OS === 'ios' ? 'Courier' : 'monospace',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    marginBottom: 2,
+    textShadowColor: '#00FF00',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 3,
   },
   trackerName: {
     color: '#FFF',
@@ -671,6 +700,9 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Courier' : 'monospace',
     fontWeight: 'bold',
     textTransform: 'uppercase',
+    textShadowColor: '#00FF00',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 2,
   },
   distBadge: {
     marginTop: 2,
@@ -680,7 +712,10 @@ const styles = StyleSheet.create({
   distText: {
     fontSize: 9,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#FFF',
+    textShadowColor: '#000',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
   emptyText: {
     color: '#666',
@@ -690,17 +725,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   scanButton: {
-    backgroundColor: '#C59E00',
+    backgroundColor: '#5b21b6',
     borderRadius: 8,
     paddingBottom: 4,
   },
   scanButtonInner: {
-    backgroundColor: '#FFCB05',
+    backgroundColor: '#8b5cf6',
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#C59E00',
+    borderColor: '#5b21b6',
   },
   scanButtonText: {
     color: '#000',
@@ -809,12 +844,12 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   cancelBtn: {
-    backgroundColor: '#555',
-    borderColor: '#333',
+    backgroundColor: '#6b46c1',
+    borderColor: '#4c1d95',
   },
   catchBtn: {
-    backgroundColor: '#FFCB05',
-    borderColor: '#C59E00',
+    backgroundColor: '#a855f7',
+    borderColor: '#7c3aed',
   },
   modalBtnText: {
     color: '#FFF',
