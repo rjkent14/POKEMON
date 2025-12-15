@@ -133,14 +133,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  blueLight: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#28AAFD',
-    borderWidth: 2,
-    borderColor: '#FFF',
-  },
   searchContainer: {
     paddingHorizontal: 20,
     marginBottom: 10,
