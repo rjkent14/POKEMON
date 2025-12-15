@@ -19,6 +19,7 @@ import Geolocation from '@react-native-community/geolocation';
 import MapView, { Marker, Circle, PROVIDER_GOOGLE } from 'react-native-maps';
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import PushNotification from 'react-native-push-notification'; // 1. Import PushNotification
+import { useFocusEffect } from '@react-navigation/native';
 
 import { fetchPokemonList, fetchPokemonDetails } from '../api/pokeapi';
 
@@ -85,6 +86,18 @@ const HuntScreen = ({ navigation }) => {
   const [targetDistance, setTargetDistance] = useState(0);
 
   const scannerAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(400)).current;
+
+  useFocusEffect(() => {
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+    return () => {
+      slideAnim.setValue(400);
+    };
+  });
 
   useEffect(() => {
     // 2. Configure Notification Channel (Required for Android)
@@ -282,23 +295,17 @@ const HuntScreen = ({ navigation }) => {
   });
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#DC0A2D" />
+    <Animated.View style={[styles.container, { transform: [{ translateX: slideAnim }] }]}>
+      <StatusBar barStyle="light-content" backgroundColor="#8b5cf6" />
 
       {/* 1. 3D HEADER */}
       <View style={styles.header}>
-        <View style={styles.blueLightContainer}>
-          <View style={styles.blueLight} />
-          <View style={styles.blueLightReflection} />
-        </View>
-        <View style={styles.statusLights}>
-          <View style={[styles.smallLight, { backgroundColor: '#FF0000' }]} />
-          <View style={[styles.smallLight, { backgroundColor: '#F1C40F' }]} />
-          <View style={[styles.smallLight, { backgroundColor: '#2ECC71' }]} />
-        </View>
+        {/* Removed blue light and status lights */}
       </View>
 
-      <Text style={styles.headerTitle}>POKÉ-HUNT</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.headerTitle}>POKE - HUNT</Text>
+      </View>
 
       {/* 2. THE SCREEN UNIT */}
       <View style={styles.screenBezel}>
@@ -452,15 +459,15 @@ const HuntScreen = ({ navigation }) => {
         </View>
       </Modal>
 
-    </View>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DC0A2D',
-    paddingTop: 50,
+    backgroundColor: '#8b5cf6',
+    paddingTop: 20,
   },
   header: {
     flexDirection: 'row',
@@ -514,12 +521,24 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '900',
     textAlign: 'center',
-    marginBottom: 15,
     fontFamily: Platform.OS === 'ios' ? 'Courier' : 'monospace',
     letterSpacing: 2,
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
+  },
+  titleContainer: {
+    backgroundColor: '#5b21b6',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginBottom: 15,
+    alignSelf: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
   screenBezel: {
     flex: 1,
@@ -608,7 +627,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderWidth: 2,
     borderColor: '#555',
-    height: 142.5,
+    height: 110,
     elevation: 3,
   },
   radarHeader: {
@@ -631,8 +650,8 @@ const styles = StyleSheet.create({
   },
   trackerCard: {
     backgroundColor: '#333',
-    width: 80,
-    height: 95,
+    width: 90,
+    height: 105,
     borderRadius: 6,
     marginRight: 10,
     alignItems: 'center',
@@ -642,8 +661,8 @@ const styles = StyleSheet.create({
     padding: 2,
   },
   trackerImage: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     marginBottom: 2,
   },
   trackerName: {

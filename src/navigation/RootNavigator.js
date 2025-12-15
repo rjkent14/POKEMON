@@ -16,6 +16,7 @@ import ProfileScreen from '../screen/ProfileScreen';
 // Import new screens (Requirements 3-5)
 import HuntScreen from '../screen/HuntScreen';
 import CaptureScreen from '../screen/CaptureScreen';
+// FeedScreen removed
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,12 +33,12 @@ const TabIcon = ({ label, focused }) => {
   return (
     <View style={styles.tabIconContainer}>
       <Text
-        style={[styles.tabIcon, { color: focused ? '#fbbf24' : '#9ca3af' }]}
+        style={[styles.tabIcon, { color: focused ? '#FFF' : '#9ca3af' }]}
       >
         {iconMap[label]}
       </Text>
       <Text
-        style={[styles.tabLabel, { color: focused ? '#fbbf24' : '#9ca3af' }]}
+        style={[styles.tabLabel, { color: focused ? '#FFF' : '#9ca3af' }]}
       >
         {label}
       </Text>
@@ -65,7 +66,7 @@ const MainTabs = () => (
       tabBarIcon: ({ focused }) => (
         <TabIcon label={route.name} focused={focused} />
       ),
-      tabBarActiveTintColor: '#fbbf24',
+      tabBarActiveTintColor: '#FFF',
       tabBarInactiveTintColor: '#9ca3af',
       headerShown: false,
       tabBarStyle: styles.tabBar,
@@ -102,7 +103,8 @@ const MainTabs = () => (
         title: 'Profile',
       }}
     />
-  </Tab.Navigator>
+    // Feed tab removed
+   </Tab.Navigator>
 );
 
 // Root Navigator (Conditional Auth/App)
@@ -114,8 +116,8 @@ export const RootNavigator = ({ isLoggedIn }) => (
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: '#111827',
-    borderTopColor: '#fbbf24',
+    backgroundColor: '#5b21b6',
+    borderTopColor: '#8b5cf6',
     borderTopWidth: 3,
     height: 70,
     paddingBottom: 8,

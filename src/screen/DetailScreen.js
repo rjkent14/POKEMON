@@ -142,7 +142,7 @@ export default function DetailScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#DC0A2D', padding: 20 },
+  container: { flex: 1, backgroundColor: '#9333ea', padding: 20 },
   backButton: { marginBottom: 10 },
   backText: { color: '#FFF', fontWeight: 'bold', fontSize: 16 },
   whiteScreen: {

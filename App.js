@@ -23,7 +23,7 @@ export default function App() {
     // Added a simple loading spinner so the screen isn't just blank
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#fbbf24" />
+        <ActivityIndicator size="large" color="#8b5cf6" />
       </View>
     );
   }
@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1f2937',
+    backgroundColor: '#5b21b6',
   },
 });

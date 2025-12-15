@@ -8,8 +8,8 @@ import HomeScreen from '../screen/HomeScreen';
 import DetailScreen from '../screen/DetailScreen';
 import ProfileScreen from '../screen/ProfileScreen';
 import HuntScreen from '../screen/HuntScreen';
-import FeedScreen from '../screen/FeedScreen';
 import EncounterScreen from '../screen/EncounterScreen'; // ⭐ New Screen
+// FeedScreen removed
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -51,7 +51,6 @@ const TabIcon = ({ label, focused }) => {
     Hunt: '🎯',
     Pokedex: '📚',
     AR: '📷',
-    Feed: '🌍',
     Profile: '👤',
   };
 
@@ -96,13 +95,7 @@ export default function MainStack() {
         component={PokedexStackNavigator} // ⭐ Changed to Stack so items are clickable
       />
 
-      {/* Tab 4: Feed */}
-      <Tab.Screen
-        name="Feed"
-        component={FeedScreen}
-      />
-
-      {/* Tab 5: Profile (Now uses Stack, so it knows about 'Detail') */}
+      {/* Tab 4: Profile (Now uses Stack, so it knows about 'Detail') */}
       <Tab.Screen
         name="Profile"
         component={ProfileStackNavigator} // ⭐ Changed from ProfileScreen

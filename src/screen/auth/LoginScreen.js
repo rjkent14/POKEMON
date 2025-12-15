@@ -60,15 +60,7 @@ export default function LoginScreen({ navigation }) {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <View style={styles.blueLightContainer}>
-          <View style={styles.blueLight} />
-          <View style={styles.blueLightReflection} />
-        </View>
-        <View style={styles.statusLights}>
-          <View style={[styles.smallLight, { backgroundColor: '#FF0000' }]} />
-          <View style={[styles.smallLight, { backgroundColor: '#F1C40F' }]} />
-          <View style={[styles.smallLight, { backgroundColor: '#2ECC71' }]} />
-        </View>
+        {/* Removed blue light and status lights */}
       </View>
 
       <Text style={styles.headerTitle}>POKÉ-EXPLORE</Text>
@@ -138,7 +130,7 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DC0A2D',
+    backgroundColor: '#6d28d9',
     paddingTop: 50,
   },
   header: {

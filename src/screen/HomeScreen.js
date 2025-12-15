@@ -1,15 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { 
+import React, { useState, useEffect, useRef } from 'react';
+import {
   View, Text, FlatList, Image, TouchableOpacity,
-  TextInput, StyleSheet, ActivityIndicator, StatusBar, Platform
+  TextInput, StyleSheet, ActivityIndicator, StatusBar, Platform, Animated
 } from 'react-native';
 import { fetchPokemonList } from '../api/pokeapi';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function HomeScreen({ navigation }) {
   const [pokemon, setPokemon] = useState([]);
   const [filteredPokemon, setFilteredPokemon] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const slideAnim = useRef(new Animated.Value(400)).current;
+
+  useFocusEffect(() => {
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+    return () => {
+      slideAnim.setValue(400);
+    };
+  });
 
   useEffect(() => {
     loadData();
@@ -48,8 +61,8 @@ export default function HomeScreen({ navigation }) {
   );
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#DC0A2D" />
+    <Animated.View style={[styles.container, { transform: [{ translateX: slideAnim }] }]}>
+      <StatusBar barStyle="light-content" backgroundColor="#8b5cf6" />
 
       {/* 1. HEADER */}
       <View style={styles.header}>
@@ -58,7 +71,7 @@ export default function HomeScreen({ navigation }) {
           style={styles.profileButton}
           onPress={() => navigation.navigate('Profile')}
         >
-          <View style={styles.blueLight} />
+          {/* Removed blue light */}
         </TouchableOpacity>
       </View>
 
@@ -76,7 +89,7 @@ export default function HomeScreen({ navigation }) {
       {/* 3. MAIN POKEMON LIST */}
       <View style={styles.listWrapper}>
         {loading ? (
-          <ActivityIndicator size="large" color="#DC0A2D" style={{marginTop: 50}} />
+          <ActivityIndicator size="large" color="#FFF" style={{marginTop: 50}} />
         ) : (
           <FlatList
             data={filteredPokemon}
@@ -90,14 +103,14 @@ export default function HomeScreen({ navigation }) {
         )}
       </View>
 
-    </View>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DC0A2D',
+    backgroundColor: '#a855f7',
   },
   header: {
     flexDirection: 'row',
@@ -145,7 +158,7 @@ const styles = StyleSheet.create({
   // Wrapper allows the list to take up space above the navbar
   listWrapper: {
     flex: 1,
-    backgroundColor: '#333',
+    backgroundColor: '#7c3aed',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     overflow: 'hidden', // Ensures content stays inside rounded corners

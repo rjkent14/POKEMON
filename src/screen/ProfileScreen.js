@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import {
   View,
   Text,
@@ -7,7 +7,8 @@ import {
   Platform,
   FlatList,
   ActivityIndicator,
-  Alert
+  Alert,
+  Animated
 } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
@@ -20,6 +21,18 @@ export default function ProfileScreen({ navigation }) {
   const [myCollection, setMyCollection] = useState([]);
   const [stats, setStats] = useState({ points: 0, badges: [], dailyChallenge: null, caughtPokemon: [] });
   const [loading, setLoading] = useState(true);
+  const slideAnim = useRef(new Animated.Value(400)).current;
+
+  useFocusEffect(() => {
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+    return () => {
+      slideAnim.setValue(400);
+    };
+  });
 
   useFocusEffect(
     useCallback(() => {
@@ -104,17 +117,9 @@ export default function ProfileScreen({ navigation }) {
   );
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, { transform: [{ translateX: slideAnim }] }]}>
       <View style={styles.header}>
-        <View style={styles.blueLightContainer}>
-          <View style={styles.blueLight} />
-          <View style={styles.blueLightReflection} />
-        </View>
-        <View style={styles.statusLights}>
-          <View style={[styles.smallLight, { backgroundColor: '#FF0000' }]} />
-          <View style={[styles.smallLight, { backgroundColor: '#F1C40F' }]} />
-          <View style={[styles.smallLight, { backgroundColor: '#2ECC71' }]} />
-        </View>
+        {/* Removed blue light and status lights */}
       </View>
 
       <Text style={styles.headerTitle}>TRAINER CARD</Text>
@@ -188,14 +193,14 @@ export default function ProfileScreen({ navigation }) {
           <Text style={styles.logoutText}>LOG OUT</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DC0A2D',
+    backgroundColor: '#7c3aed',
     paddingTop: 50,
   },
   header: {
