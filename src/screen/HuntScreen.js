@@ -10,7 +10,6 @@ import {
   Platform,
   StatusBar,
   Animated,
-  Easing,
   Dimensions,
   Image,
   Modal
