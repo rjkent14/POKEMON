@@ -16,7 +16,7 @@ import {
 import Geolocation from '@react-native-community/geolocation';
 import MapView, { Marker, Circle, PROVIDER_GOOGLE } from 'react-native-maps';
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
-import PushNotification from 'react-native-push-notification'; // 1. Import PushNotification
+import PushNotification from 'react-native-push-notification';
 import { useFocusEffect } from '@react-navigation/native';
 
 import { fetchPokemonList, fetchPokemonDetails } from '../api/pokeapi';
@@ -97,7 +97,6 @@ const HuntScreen = ({ navigation }) => {
   });
 
   useEffect(() => {
-    // 2. Configure Notification Channel (Required for Android)
     PushNotification.createChannel(
       {
         channelId: "pokedex-alerts",
@@ -232,7 +231,6 @@ const HuntScreen = ({ navigation }) => {
 
     setNearbyPokemon(enrichedSpawns);
 
-    // 3. Trigger Local Notification only if within range
     const catchableSpawns = enrichedSpawns.filter(p => {
         const dist = getDistance(lat, lon, p.latitude, p.longitude);
         return dist < CAPTURE_RADIUS_METERS;
